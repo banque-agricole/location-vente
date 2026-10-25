@@ -69,11 +69,22 @@
     }
 
     /* Actions rapides (WhatsApp) */
+    .quick-actions-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .quick-actions-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+
     .quick-actions {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-bottom: 30px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -82,8 +93,8 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 12px 24px;
-      font-size: 15px;
+      padding: 12px 20px;
+      font-size: 14px;
       font-weight: 600;
       border-radius: 50px;
       text-decoration: none;
@@ -195,17 +206,35 @@
       background: #eff6ff;
     }
 
-    .btn-cta {
-      width: 100%;
-      background: var(--primary-color);
-      color: white;
-      padding: 16px;
-      font-size: 16px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(13, 110, 253, 0.25);
+    .btn-submit-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .btn-cta:hover { background: var(--primary-dark); }
+    .btn-cta {
+      flex: 1;
+      min-width: 240px;
+      background: var(--secondary-color);
+      color: white;
+      padding: 15px;
+      font-size: 15px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cta:hover { 
+      background: var(--secondary-dark); 
+      transform: translateY(-2px);
+    }
 
     /* Forms General */
     .hidden { display: none !important; }
@@ -295,6 +324,7 @@
       .service-selector, .form-grid { grid-template-columns: 1fr; }
       .full-width { grid-column: span 1; }
       .main-wrapper { padding: 20px 15px; }
+      .btn-submit-group { flex-direction: column; }
     }
   </style>
 </head>
@@ -310,11 +340,17 @@
       <p>Location de véhicules & Achat de voitures d'occasion contrôlées</p>
     </div>
 
-    <!-- Contact direct WhatsApp -->
-    <div class="quick-actions">
-      <a href="https://wa.me/22995319042" class="btn btn-whatsapp" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i> Contact direct (+229 95 31 90 42)
-      </a>
+    <!-- Contact direct WhatsApp (2 numéros) -->
+    <div class="quick-actions-container">
+      <p class="quick-actions-title">Contact rapide WhatsApp :</p>
+      <div class="quick-actions">
+        <a href="https://wa.me/2290195319042" class="btn btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Ligne 1 (01 95 31 90 42)
+        </a>
+        <a href="https://wa.me/2290197043732" class="btn btn-whatsapp" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Ligne 2 (01 97 04 37 32)
+        </a>
+      </div>
     </div>
 
     <!-- Choix du service principal -->
@@ -374,7 +410,7 @@
       <h2>Demande de Location</h2>
     </div>
 
-    <form id="formLocation" onsubmit="envoyerWhatsAppLocation(event)">
+    <form id="formLocation">
       <div class="form-grid">
 
         <div class="form-group full-width">
@@ -389,7 +425,7 @@
           <label for="loc_phone">Téléphone / WhatsApp *</label>
           <div class="input-icon-wrapper">
             <i class="fa-solid fa-phone"></i>
-            <input type="tel" id="loc_phone" class="form-control" placeholder="Ex: 95 31 90 42" required>
+            <input type="tel" id="loc_phone" class="form-control" placeholder="Ex: 01 95 31 90 42" required>
           </div>
         </div>
 
@@ -464,9 +500,15 @@
         </div>
 
         <div class="full-width">
-          <button type="submit" class="btn btn-cta">
-            <i class="fa-brands fa-whatsapp"></i> Envoyer la demande de location sur WhatsApp
-          </button>
+          <p style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569;">Envoyer la demande vers :</p>
+          <div class="btn-submit-group">
+            <button type="button" onclick="envoyerWhatsAppLocation('2290195319042')" class="btn-cta">
+              <i class="fa-brands fa-whatsapp"></i> Envoyer sur le 01 95 31 90 42
+            </button>
+            <button type="button" onclick="envoyerWhatsAppLocation('2290197043732')" class="btn-cta">
+              <i class="fa-brands fa-whatsapp"></i> Envoyer sur le 01 97 04 37 32
+            </button>
+          </div>
         </div>
 
       </div>
@@ -484,7 +526,7 @@
       <h2>Demande d'Achat de Véhicule</h2>
     </div>
 
-    <form id="formAchat" onsubmit="envoyerWhatsAppAchat(event)">
+    <form id="formAchat">
       <div class="form-grid">
 
         <div class="form-group full-width">
@@ -499,7 +541,7 @@
           <label for="ach_phone">Téléphone / WhatsApp *</label>
           <div class="input-icon-wrapper">
             <i class="fa-solid fa-phone"></i>
-            <input type="tel" id="ach_phone" class="form-control" placeholder="Ex: 95 31 90 42" required>
+            <input type="tel" id="ach_phone" class="form-control" placeholder="Ex: 01 95 31 90 42" required>
           </div>
         </div>
 
@@ -563,9 +605,15 @@
         </div>
 
         <div class="full-width">
-          <button type="submit" class="btn btn-cta" style="background-color: #d97706;">
-            <i class="fa-brands fa-whatsapp"></i> Envoyer la demande d'Achat sur WhatsApp
-          </button>
+          <p style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569;">Envoyer la demande d'Achat vers :</p>
+          <div class="btn-submit-group">
+            <button type="button" onclick="envoyerWhatsAppAchat('2290195319042')" class="btn-cta" style="background-color: #d97706;">
+              <i class="fa-brands fa-whatsapp"></i> Envoyer sur le 01 95 31 90 42
+            </button>
+            <button type="button" onclick="envoyerWhatsAppAchat('2290197043732')" class="btn-cta" style="background-color: #d97706;">
+              <i class="fa-brands fa-whatsapp"></i> Envoyer sur le 01 97 04 37 32
+            </button>
+          </div>
         </div>
 
       </div>
@@ -605,12 +653,13 @@
     afficherFormulaireLocation();
   }
 
-  // Numéro WhatsApp cible : +229 95 31 90 42
-  var numeroWhatsApp = "22995319042";
-
   // Envoi WhatsApp LOCATION
-  function envoyerWhatsAppLocation(event) {
-    event.preventDefault();
+  function envoyerWhatsAppLocation(numeroCible) {
+    var form = document.getElementById('formLocation');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     var nom = document.getElementById('loc_fullname').value;
     var tel = document.getElementById('loc_phone').value;
@@ -635,12 +684,16 @@
       "🗺 *Destination :* " + dest + "\n" +
       "📝 *Notes :* " + (notes ? notes : "Aucune");
 
-    window.open("https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message), '_blank');
+    window.open("https://wa.me/" + numeroCible + "?text=" + encodeURIComponent(message), '_blank');
   }
 
   // Envoi WhatsApp ACHAT
-  function envoyerWhatsAppAchat(event) {
-    event.preventDefault();
+  function envoyerWhatsAppAchat(numeroCible) {
+    var form = document.getElementById('formAchat');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     var nom = document.getElementById('ach_fullname').value;
     var tel = document.getElementById('ach_phone').value;
@@ -657,11 +710,11 @@
       "💰 *Budget prévu :* " + budget + "\n" +
       "🚘 *Type recherché :* " + type + "\n" +
       "🏷 *Marque/Modèle souhaité :* " + (marque ? marque : "Indifférent") + "\n" +
-      "⚙️️ *Boîte de vitesses :* " + boite + "\n" +
+      "⚙ *Boîte de vitesses :* " + boite + "\n" +
       "⛽️ *Carburant :* " + carburant + "\n" +
       "📝 *Exigences/Précisions :* " + (details ? details : "Aucune");
 
-    window.open("https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(message), '_blank');
+    window.open("https://wa.me/" + numeroCible + "?text=" + encodeURIComponent(message), '_blank');
   }
 </script>
 
